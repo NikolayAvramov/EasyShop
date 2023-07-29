@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.scss";
 import { Card } from "./components/Card/Card";
 import { Alert } from "./components/Alert/Alert";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ function App() {
         <>
             {isOpen && <Alert />}
             <Card setIsOpen={setIsOpen} />
+            <Footer />
         </>
     );
 }
