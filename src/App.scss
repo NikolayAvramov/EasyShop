@@ -1,6 +1,16 @@
-#root {
-    font-size: 62.5%;
+:root {
     margin: 0;
     font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
         "Lucida Sans", Arial, sans-serif;
+    font-size: 62.5%;
+    background-image: linear-gradient(
+        to right,
+        rgba(224, 62, 62, 0.815),
+        rgba(6, 80, 163, 0.863)
+    );
+}
+.app {
+    max-width: 141rem;
+    margin: 0 auto;
+    background-color: white;
 }

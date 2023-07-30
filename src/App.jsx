@@ -3,6 +3,9 @@ import "./App.scss";
 import { Card } from "./components/Card/Card";
 import { Alert } from "./components/Alert/Alert";
 import { Footer } from "./components/Footer/Footer";
+import { Home } from "./components/Home/Home";
+import { Navigation } from "./components/Navigation/Navigation";
+import { Cart } from "./components/Cart/Cart";
 
 function App() {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,11 +17,13 @@ function App() {
     }
 
     return (
-        <>
+        <div className="app">
+            <Cart />
+            {/* <Navigation />
             {isOpen && <Alert />}
-            <Card setIsOpen={setIsOpen} />
-            <Footer />
-        </>
+            <Home setIsOpen={setIsOpen} />
+            <Footer /> */}
+        </div>
     );
 }
 

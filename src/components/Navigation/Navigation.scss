@@ -1,0 +1,61 @@
+.nav {
+    background-image: linear-gradient(
+        to right,
+        rgb(134, 134, 204),
+        rgb(235, 102, 102)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    &-logo {
+        width: 18rem;
+    }
+    &-search-container {
+        font-size: 1.3rem;
+    }
+    &-search-input {
+        font-size: 1.7rem;
+        color: rgb(141, 141, 141);
+        width: 35rem;
+        height: 3rem;
+        border-radius: 5px;
+    }
+    &-search-icon {
+        transform: translate(-3rem);
+    }
+    &-user-container {
+        font-size: 2.2rem;
+        display: flex;
+        gap: 1rem;
+        margin-right: 2rem;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+.category {
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgb(139, 43, 230);
+    &-title {
+        margin: 0;
+        text-align: center;
+        letter-spacing: 0.3rem;
+        font-size: 2.7rem;
+    }
+    &-list {
+        display: flex;
+        justify-content: space-around;
+        gap: 1rem;
+        list-style: none;
+        &-item {
+            border: 1px solid gray;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
