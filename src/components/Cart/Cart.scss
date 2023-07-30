@@ -17,7 +17,8 @@
 }
 
 .modal {
-    width: 45rem;
+    width: 60rem;
+    min-height: 40rem;
     position: absolute;
     max-height: 90vh;
     border-radius: 20px;
@@ -36,11 +37,67 @@
     .cart-title {
         margin: 0 auto;
         font-size: 3rem;
+        margin-bottom: 2rem;
     }
     .cart-close-btn {
         position: absolute;
         right: 1rem;
         top: 0;
         font-size: 2rem;
+        &:hover {
+            cursor: pointer;
+        }
     }
+}
+.body {
+    display: flex;
+    flex-direction: column;
+}
+.footer {
+    text-align: center;
+    &-total-price {
+        display: flex;
+        align-items: center;
+        margin-left: 30%;
+    }
+    &-title {
+        width: 40%;
+
+        background-image: linear-gradient(to right, red, rgb(17, 20, 226));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+    &-buton {
+        color: white;
+        width: 60%;
+        &:link,
+        &:visited {
+            color: white;
+            text-decoration: none;
+        }
+        font-size: 1.7rem;
+        background-image: linear-gradient(
+            to right,
+            rgb(48 74 170),
+            rgb(34 105 196)
+        );
+        margin: 0.4rem 0.8rem;
+        padding: 0.2rem 0.4rem;
+        border-radius: 50rem;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.01) translateY(-0.3rem);
+        }
+    }
+    .show-total-price {
+        font-size: 2rem;
+        margin-left: 6rem;
+    }
+}
+.discount-input {
+    border-radius: 0.4rem;
+    height: 2rem;
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
 }

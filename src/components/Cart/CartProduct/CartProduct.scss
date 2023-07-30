@@ -1,0 +1,44 @@
+.cart-product {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.cart-img {
+    width: 8rem;
+}
+.active {
+    display: flex;
+    height: 3rem;
+    border: 1px solid gray;
+    padding: 1rem;
+    width: 12rem;
+}
+
+.input {
+    width: 2rem;
+    height: 2rem;
+}
+.buton {
+    border: 1px solid gray;
+    padding: 0.2rem;
+    font-size: 2rem;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.info-side {
+    display: flex;
+    align-items: center;
+}
+.cart-title {
+    font-size: 1.6rem;
+    margin-left: 3rem;
+}
+.cart-price {
+    margin: 0.5rem 0.3rem;
+
+    font-size: 1.4rem;
+    font-weight: 700;
+}

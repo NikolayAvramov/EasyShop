@@ -10,12 +10,18 @@
     text-align: center;
 }
 .product-section {
-    width: 85%;
-    height: fit-content;
     display: grid;
     grid-template-columns: 22% 22% 22% 22%;
     gap: 3rem;
     row-gap: 3rem;
     margin: 2rem;
     padding-left: 6rem;
+}
+.product-container {
+    height: fit-content;
+    width: 85%;
+}
+.product-count {
+    font-size: 1.5rem;
+    margin-left: 92%;
 }

@@ -24,6 +24,9 @@
     }
     &-search-icon {
         transform: translate(-3rem);
+        &:hover {
+            cursor: pointer;
+        }
     }
     &-user-container {
         font-size: 2.2rem;

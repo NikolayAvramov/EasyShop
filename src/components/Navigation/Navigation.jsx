@@ -1,13 +1,19 @@
 import "./Navigation.scss";
 import navLogo from "../../assets/navLogo.png";
 import { BsSearch } from "react-icons/bs";
+import { useContext } from "react";
+import { ContentContext } from "../../context/ContentContext";
+
 import {
     AiOutlineHeart,
     AiOutlineShoppingCart,
     AiOutlineUserAdd,
 } from "react-icons/ai";
 
-export function Navigation() {
+export function Navigation({ setOpenCart }) {
+    const { allProducts, category, setCategory, sortByCategory } =
+        useContext(ContentContext);
+
     return (
         <>
             <div className="nav">
@@ -21,19 +27,67 @@ export function Navigation() {
                 <div className="nav-user-container">
                     <AiOutlineUserAdd />
                     <AiOutlineHeart />
-                    <AiOutlineShoppingCart />
+                    <AiOutlineShoppingCart
+                        onClick={() => {
+                            setOpenCart(true);
+                        }}
+                    />
                 </div>
             </div>
             <div className="category">
                 <h2 className="category-title">Category</h2>
-                <ul className="category-list">
-                    <li className="category-list-item">All</li>
-                    <li className="category-list-item">TV's</li>
-                    <li className="category-list-item">Laptops</li>
-                    <li className="category-list-item">Smartphones</li>
-                    <li className="category-list-item">Tablets</li>
-                    <li className="category-list-item">Cameras</li>
-                </ul>
+                {allProducts && (
+                    <ul className="category-list">
+                        <li
+                            className="category-list-item"
+                            onClick={() => {
+                                sortByCategory("All");
+                            }}
+                        >
+                            All
+                        </li>
+                        <li
+                            className="category-list-item"
+                            onClick={() => {
+                                sortByCategory("tv");
+                            }}
+                        >
+                            TV's
+                        </li>
+                        <li
+                            className="category-list-item"
+                            onClick={() => {
+                                sortByCategory("laptop");
+                            }}
+                        >
+                            Laptops
+                        </li>
+                        <li
+                            className="category-list-item"
+                            onClick={() => {
+                                sortByCategory("smartphone");
+                            }}
+                        >
+                            Smartphones
+                        </li>
+                        <li
+                            className="category-list-item"
+                            onClick={() => {
+                                sortByCategory("tablets");
+                            }}
+                        >
+                            Tablets
+                        </li>
+                        <li
+                            className="category-list-item"
+                            onClick={() => {
+                                sortByCategory("cameras");
+                            }}
+                        >
+                            Cameras
+                        </li>
+                    </ul>
+                )}
             </div>
         </>
     );
