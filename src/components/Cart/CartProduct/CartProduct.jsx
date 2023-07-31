@@ -1,23 +1,54 @@
 import "./CartProduct.scss";
 import { BsPlusSquare } from "react-icons/bs";
 import { AiOutlineMinusSquare } from "react-icons/ai";
-export function CartProduct() {
+import { useState, useEffect } from "react";
+export function CartProduct({ setTotalPrice, item }) {
+    const [quantity, setQuantity] = useState(1);
+
+    if (quantity > item.quantity) {
+        setQuantity(Math.min(quantity, item.quantity));
+    } else if (quantity < 1) {
+        setQuantity(1);
+    }
+    useEffect(() => {
+        if (quantity === 1) {
+            setTotalPrice(state => state + item.price);
+        }
+    }, []);
+
+    function addQuantity() {
+        setQuantity(state => state + 1);
+        if (quantity !== item.quantity) {
+            setTotalPrice(state => state + item.price);
+        }
+    }
+    function minusQuantity() {
+        setQuantity(quantity - 1);
+        if (quantity !== 1) {
+            setTotalPrice(state => state - item.price);
+        }
+    }
+
     return (
         <>
             <div className="cart-product">
                 <div className="info-side">
                     <img
-                        src="https://www.technopolis.bg/medias/sys_master/ha7/hbd/27213338804254.jpg"
+                        src={item.mainImg.url}
                         alt="cart img"
                         className="cart-img"
                     />
-                    <h4 className="cart-title"> Tv LG</h4>
+                    <h4 className="cart-title">{item.title}</h4>
                 </div>
                 <div className="active">
-                    <AiOutlineMinusSquare className="buton" />
-                    <input type="text" className="input" />
-                    <BsPlusSquare className="buton" />
-                    <p className="cart-price">450$</p>
+                    <AiOutlineMinusSquare
+                        className="buton"
+                        onClick={minusQuantity}
+                    />
+                    <p className="quantity">{quantity}</p>
+
+                    <BsPlusSquare className="buton" onClick={addQuantity} />
+                    <p className="cart-price">{item.price * quantity}$</p>
                 </div>
             </div>
         </>

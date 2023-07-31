@@ -2,8 +2,14 @@ import "./Card.scss";
 import { Link } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ContentContext } from "../../context/ContentContext";
 export function Card({ setIsOpen, product }) {
+    const { setCartItem } = useContext(ContentContext);
+    function onClickHandler() {
+        setIsOpen(true);
+        setCartItem(state => [...state, product]);
+    }
     return (
         <>
             <div className="card">
@@ -37,7 +43,9 @@ export function Card({ setIsOpen, product }) {
                 )} ...`}</p>
                 <div className="card-buton-wrapper">
                     <Link
-                        onClick={() => setIsOpen(true)}
+                        onClick={() => {
+                            onClickHandler();
+                        }}
                         className="card-buton"
                     >
                         <BsCart4 />

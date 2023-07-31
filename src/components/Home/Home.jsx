@@ -14,6 +14,7 @@ export function Home({ setIsOpen }) {
     } = useContext(ContentContext);
 
     const [sorted, setSorted] = useState(null);
+    const [showedProduct, setShowedProduct] = useState(12);
     useEffect(() => {
         getAllProducts();
     }, []);
@@ -21,9 +22,11 @@ export function Home({ setIsOpen }) {
     useEffect(() => {
         sortByCategory("All");
     }, [allProducts]);
+
     if (sorted) {
         sortByNameAndPrice(sortedProducts, sorted);
     }
+
     return (
         <>
             <div className="home">
@@ -36,7 +39,11 @@ export function Home({ setIsOpen }) {
                         <>
                             <div className="sorting-buttons">
                                 <p className="product-count">
-                                    {sortedProducts.length} Items.
+                                    {Math.min(
+                                        showedProduct,
+                                        sortedProducts.length
+                                    )}
+                                    Items.
                                 </p>
                                 <p>
                                     Sort by name
@@ -68,14 +75,27 @@ export function Home({ setIsOpen }) {
 
                     <div className="product-section">
                         {sortedProducts &&
-                            sortedProducts.map(product => (
-                                <Card
-                                    key={product.objectId}
-                                    setIsOpen={setIsOpen}
-                                    product={product}
-                                />
-                            ))}
+                            sortedProducts
+                                .slice(0, showedProduct)
+                                .map(product => (
+                                    <Card
+                                        key={product.objectId}
+                                        setIsOpen={setIsOpen}
+                                        product={product}
+                                    />
+                                ))}
                     </div>
+                    {sortedProducts &&
+                        showedProduct < sortedProducts.length && (
+                            <button
+                                onClick={() => {
+                                    setShowedProduct(state => state + 4);
+                                }}
+                                className="load-more-btn"
+                            >
+                                Load More
+                            </button>
+                        )}
                 </div>
             </div>
         </>

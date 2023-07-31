@@ -6,6 +6,8 @@ export function ContentProvider({ children }) {
     const [allProducts, setAllProducts] = useState(null);
     const [category, setCategory] = useState(null);
     const [sortedProducts, setSortedProducts] = useState(null);
+    const [cartItem, setCartItem] = useState([]);
+
     function getAllProducts() {
         fetchAllProducts().then(result => setAllProducts(result));
     }
@@ -13,7 +15,7 @@ export function ContentProvider({ children }) {
         setCategory(cat);
         let sorted = allProducts;
         if (cat == "All") {
-            setSortedProducts(sorted);
+            setSortedProducts(allProducts);
         } else {
             sorted = sorted.filter(product => product.category === cat);
         }
@@ -22,6 +24,7 @@ export function ContentProvider({ children }) {
     }
     function sortByNameAndPrice(arr, criteria) {
         let sortedArr = [];
+
         switch (criteria) {
             case "name+":
                 sortedArr = arr.sort((a, b) => {
@@ -65,6 +68,9 @@ export function ContentProvider({ children }) {
                 break;
         }
     }
+
+    console.log(cartItem);
+
     const contentValues = {
         allProducts,
         getAllProducts,
@@ -73,6 +79,8 @@ export function ContentProvider({ children }) {
         sortedProducts,
         sortByNameAndPrice,
         setSortedProducts,
+        setCartItem,
+        cartItem,
     };
 
     return (

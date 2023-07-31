@@ -1,8 +1,20 @@
 import "./Cart.scss";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { CartProduct } from "./CartProduct/CartProduct";
+import { useContext, useState } from "react";
+import { ContentContext } from "../../context/ContentContext";
 
 export function Cart({ setOpenCart }) {
+    const { cartItem } = useContext(ContentContext);
+    const [discountCode, setDiscountCode] = useState("");
+    const [totalPrice, setTotalPrice] = useState(0);
+    function makeDiscount(e) {
+        e.preventDefault();
+        if (discountCode === "HireMe10") {
+            setTotalPrice(state => state * 0.9);
+        }
+    }
+
     return (
         <div className="overlay">
             <div
@@ -22,21 +34,35 @@ export function Cart({ setOpenCart }) {
                     />
                 </div>
                 <div className="body">
-                    <CartProduct />
-                    <CartProduct />
-                    <CartProduct />
+                    {cartItem ? (
+                        cartItem.map((item, index) => (
+                            <CartProduct
+                                key={item.objectId + index}
+                                setTotalPrice={setTotalPrice}
+                                item={item}
+                            />
+                        ))
+                    ) : (
+                        <p>Your cart is empty!</p>
+                    )}
                 </div>
                 <div className="footer">
                     <div className="footer-total-price">
                         <h3 className="footer-title">Total Price</h3>
-                        <p className="show-total-price">2343$</p>
+                        <p className="show-total-price">
+                            {totalPrice.toFixed(2)}$
+                        </p>
                     </div>
                     <div className="discount">
-                        <input
-                            type="text"
-                            placeholder="Discount code here"
-                            className="discount-input"
-                        />
+                        <form action="submit " onSubmit={e => makeDiscount(e)}>
+                            <input
+                                type="text"
+                                placeholder="Discount code here"
+                                className="discount-input"
+                                value={discountCode}
+                                onChange={e => setDiscountCode(e.target.value)}
+                            />
+                        </form>
                     </div>
                     <button className="footer-buton">Next Step</button>
                     <button

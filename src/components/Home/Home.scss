@@ -28,3 +28,15 @@
 .sorting-buttons {
     font-size: 2rem;
 }
+.load-more-btn {
+    font-size: 2rem;
+    background-color: rgb(121, 146, 228);
+    margin-bottom: 2rem;
+    margin-left: 50%;
+    transform: translate(-50%);
+    border-radius: 0.5rem;
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-0.2rem) translate(-50%);
+    }
+}
