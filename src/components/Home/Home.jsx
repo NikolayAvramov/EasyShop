@@ -3,17 +3,17 @@ import { Card } from "../Card/Card";
 import { SideBar } from "../SideBar/SideBar";
 import "./Home.scss";
 import { ContentContext } from "../../context/ContentContext";
+import { BsFillFileArrowUpFill, BsFillFileArrowDownFill } from "react-icons/bs";
 export function Home({ setIsOpen }) {
     const {
         allProducts,
         getAllProducts,
         sortedProducts,
-        sortByName,
+        sortByNameAndPrice,
         sortByCategory,
-        setSortedProducts,
     } = useContext(ContentContext);
 
-    const [isSorted, setIsSorted] = useState(false);
+    const [sorted, setSorted] = useState(null);
     useEffect(() => {
         getAllProducts();
     }, []);
@@ -21,8 +21,8 @@ export function Home({ setIsOpen }) {
     useEffect(() => {
         sortByCategory("All");
     }, [allProducts]);
-    if (isSorted) {
-        sortByName(sortedProducts);
+    if (sorted) {
+        sortByNameAndPrice(sortedProducts, sorted);
     }
     return (
         <>
@@ -34,21 +34,35 @@ export function Home({ setIsOpen }) {
                 <div className="product-container">
                     {sortedProducts && (
                         <>
-                            <p className="product-count">
-                                {sortedProducts.length} Items.
-                            </p>
-                            <p>
-                                Sort by
-                                <button
-                                    onClick={() => {
-                                        setIsSorted(val => !val);
-                                        // sortByName(sortedProducts);
-                                    }}
-                                >
-                                    name
-                                </button>
-                                price
-                            </p>
+                            <div className="sorting-buttons">
+                                <p className="product-count">
+                                    {sortedProducts.length} Items.
+                                </p>
+                                <p>
+                                    Sort by name
+                                    <BsFillFileArrowDownFill
+                                        onClick={() => {
+                                            setSorted("name+");
+                                        }}
+                                    />
+                                    <BsFillFileArrowUpFill
+                                        onClick={() => {
+                                            setSorted("name-");
+                                        }}
+                                    />
+                                    by price
+                                    <BsFillFileArrowDownFill
+                                        onClick={() => {
+                                            setSorted("num+");
+                                        }}
+                                    />
+                                    <BsFillFileArrowUpFill
+                                        onClick={() => {
+                                            setSorted("num-");
+                                        }}
+                                    />
+                                </p>
+                            </div>
                         </>
                     )}
 

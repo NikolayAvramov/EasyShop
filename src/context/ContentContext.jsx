@@ -20,16 +20,50 @@ export function ContentProvider({ children }) {
 
         setSortedProducts(sorted);
     }
-    function sortByName(arr) {
+    function sortByNameAndPrice(arr, criteria) {
         let sortedArr = [];
-        sortedArr = arr.sort((a, b) => {
-            let first = a.title.toLowerCase().split(" ").join("");
-            let second = b.title.toLowerCase().split(" ").join("");
-            console.log(first, second);
-            return first.localeCompare(second);
-        });
-
-        setSortedProducts(sortedArr);
+        switch (criteria) {
+            case "name+":
+                sortedArr = arr.sort((a, b) => {
+                    let first = a.title.toLowerCase().split(" ").join("");
+                    let second = b.title.toLowerCase().split(" ").join("");
+                    // console.log(first, second);
+                    return first.localeCompare(second);
+                });
+                console.log(sortedArr);
+                setSortedProducts(sortedArr);
+                break;
+            case "name-":
+                sortedArr = arr.sort((a, b) => {
+                    let first = a.title.toLowerCase().split(" ").join("");
+                    let second = b.title.toLowerCase().split(" ").join("");
+                    // console.log(first, second);
+                    return second.localeCompare(first);
+                });
+                console.log(sortedArr);
+                setSortedProducts(sortedArr);
+                break;
+            case "num+":
+                sortedArr = arr.sort((a, b) => {
+                    let first = a.price;
+                    let second = b.price;
+                    // console.log(first, second);
+                    return first - second;
+                });
+                console.log(sortedArr);
+                setSortedProducts(sortedArr);
+                break;
+            case "num-":
+                sortedArr = arr.sort((a, b) => {
+                    let first = a.price;
+                    let second = b.price;
+                    // console.log(first, second);
+                    return second - first;
+                });
+                console.log(sortedArr);
+                setSortedProducts(sortedArr);
+                break;
+        }
     }
     const contentValues = {
         allProducts,
@@ -37,7 +71,7 @@ export function ContentProvider({ children }) {
         sortByCategory,
         category,
         sortedProducts,
-        sortByName,
+        sortByNameAndPrice,
         setSortedProducts,
     };
 
