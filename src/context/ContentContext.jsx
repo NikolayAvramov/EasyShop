@@ -4,20 +4,29 @@ export const ContentContext = createContext();
 
 export function ContentProvider({ children }) {
     const [allProducts, setAllProducts] = useState(null);
-    const [category, setCategory] = useState(null);
     const [sortedProducts, setSortedProducts] = useState(null);
     const [cartItem, setCartItem] = useState([]);
-
+    const [searchWord, setSearchWord] = useState("");
+    const [category, setCategory] = useState("");
+    const [showFilter, setShowFilter] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     function getAllProducts() {
         fetchAllProducts().then(result => setAllProducts(result));
     }
-    function sortByCategory(cat) {
-        setCategory(cat);
+    function filterData(cat, val) {
         let sorted = allProducts;
-        if (cat == "All") {
+        if (category) {
+            sorted = sorted.filter(product => product.category === category);
+        }
+
+        if (val === "All" || val === "") {
             setSortedProducts(allProducts);
         } else {
-            sorted = sorted.filter(product => product.category === cat);
+            if (cat === "price") {
+                sorted = sorted.filter(product => product[cat] <= val);
+            } else {
+                sorted = sorted.filter(product => product[cat] === val);
+            }
         }
 
         setSortedProducts(sorted);
@@ -30,30 +39,27 @@ export function ContentProvider({ children }) {
                 sortedArr = arr.sort((a, b) => {
                     let first = a.title.toLowerCase().split(" ").join("");
                     let second = b.title.toLowerCase().split(" ").join("");
-                    // console.log(first, second);
                     return first.localeCompare(second);
                 });
-                console.log(sortedArr);
+
                 setSortedProducts(sortedArr);
                 break;
             case "name-":
                 sortedArr = arr.sort((a, b) => {
                     let first = a.title.toLowerCase().split(" ").join("");
                     let second = b.title.toLowerCase().split(" ").join("");
-                    // console.log(first, second);
                     return second.localeCompare(first);
                 });
-                console.log(sortedArr);
+
                 setSortedProducts(sortedArr);
                 break;
             case "num+":
                 sortedArr = arr.sort((a, b) => {
                     let first = a.price;
                     let second = b.price;
-                    // console.log(first, second);
                     return first - second;
                 });
-                console.log(sortedArr);
+
                 setSortedProducts(sortedArr);
                 break;
             case "num-":
@@ -63,24 +69,38 @@ export function ContentProvider({ children }) {
                     // console.log(first, second);
                     return second - first;
                 });
-                console.log(sortedArr);
+
                 setSortedProducts(sortedArr);
                 break;
         }
     }
 
-    console.log(cartItem);
-
+    function handleChange(e) {
+        filterData(e.target.name, e.target.value);
+    }
+    function delItem(item) {
+        setCartItem(state =>
+            state.filter(product => product.objectId !== item.objectId)
+        );
+    }
     const contentValues = {
         allProducts,
         getAllProducts,
-        sortByCategory,
-        category,
+        filterData,
+        setCategory,
         sortedProducts,
         sortByNameAndPrice,
         setSortedProducts,
         setCartItem,
         cartItem,
+        searchWord,
+        setSearchWord,
+        handleChange,
+        showFilter,
+        setShowFilter,
+        isOpen,
+        setIsOpen,
+        delItem,
     };
 
     return (

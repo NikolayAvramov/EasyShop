@@ -1,3 +1,4 @@
+@import "../../mixins";
 .discount-overlay {
     position: absolute;
     top: 0;
@@ -18,8 +19,8 @@
 
 .discount-modal {
     color: white;
-    width: 50rem;
-    height: 30rem;
+    max-width: 50rem;
+    max-height: 30rem;
     position: absolute;
     max-height: 90vh;
     border-radius: 20px;
@@ -30,12 +31,25 @@
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @include respond(phoneB) {
+        width: 60%;
+        font-size: 1.5rem;
+    }
+    @include respond(phoneM) {
+        width: 70%;
+    }
+    @include respond(phoneS) {
+        width: 80%;
+    }
 }
 
 .discount-alert-message {
     margin: auto;
     width: 60%;
     font-size: 2.6rem;
+    @include respond(phoneB) {
+        font-size: 2rem;
+    }
 }
 .discount-code {
     color: transparent;

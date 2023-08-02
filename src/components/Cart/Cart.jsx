@@ -34,16 +34,17 @@ export function Cart({ setOpenCart }) {
                     />
                 </div>
                 <div className="body">
-                    {cartItem ? (
+                    {cartItem.length > 0 ? (
                         cartItem.map((item, index) => (
                             <CartProduct
                                 key={item.objectId + index}
                                 setTotalPrice={setTotalPrice}
+                                totalPrice={totalPrice}
                                 item={item}
                             />
                         ))
                     ) : (
-                        <p>Your cart is empty!</p>
+                        <p className="empty-cart-text">Your cart is empty!</p>
                     )}
                 </div>
                 <div className="footer">

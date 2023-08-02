@@ -39,16 +39,16 @@ export function Footer() {
                 </ul>
                 <h3 className="footer-message">Follow us on:</h3>
                 <ul className="footer-list">
-                    <li className="footer-item">
+                    <li className={`footer-item, icons`}>
                         <BsFacebook className="footer-follow-link" />
                     </li>
-                    <li className="footer-item">
+                    <li className={`footer-item, icons`}>
                         <BsInstagram className="footer-follow-link" />
                     </li>
-                    <li className="footer-item">
+                    <li className={`footer-item, icons`}>
                         <BsTiktok className="footer-follow-link" />
                     </li>
-                    <li className="footer-item">
+                    <li className={`footer-item, icons`}>
                         <BsTwitter className="footer-follow-link" />
                     </li>
                 </ul>

@@ -1,13 +1,26 @@
+@import "../src/mixins";
 :root {
     margin: 0;
     font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
         "Lucida Sans", Arial, sans-serif;
-    font-size: 62.5%;
+    font-size: 65.5%;
     background-image: linear-gradient(
         to right,
         rgba(224, 62, 62, 0.815),
         rgba(6, 80, 163, 0.863)
     );
+    @include respond(laptopL) {
+        font-size: 62.5%;
+    }
+    @include respond(laptop) {
+        font-size: 61.5%;
+    }
+    @include respond(tab-land) {
+        font-size: 55.5%;
+    }
+    @include respond(tab-port) {
+        font-size: 50%;
+    }
 }
 .app {
     max-width: 141rem;

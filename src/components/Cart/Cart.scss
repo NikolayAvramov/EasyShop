@@ -1,3 +1,4 @@
+@import "../../mixins";
 .overlay {
     position: absolute;
     top: 0;
@@ -29,6 +30,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @include respond(phoneB) {
+        width: 90%;
+    }
 }
 .header {
     display: flex;
@@ -100,4 +104,10 @@
     height: 2rem;
     font-size: 1.7rem;
     margin-bottom: 1rem;
+}
+.empty-cart-text {
+    font-size: 2rem;
+    min-height: 11rem;
+    text-align: center;
+    padding-top: 3rem;
 }

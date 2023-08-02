@@ -1,18 +1,24 @@
 import "./Card.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ContentContext } from "../../context/ContentContext";
-export function Card({ setIsOpen, product }) {
-    const { setCartItem } = useContext(ContentContext);
+export function Card({ product, setIsOpen }) {
+    const navigate = useNavigate();
+    const { setCartItem, cartItem } = useContext(ContentContext);
     function onClickHandler() {
         setIsOpen(true);
         setCartItem(state => [...state, product]);
     }
     return (
         <>
-            <div className="card">
+            <div
+                className="card"
+                onClick={() => {
+                    navigate(`/details/${product.objectId}`);
+                }}
+            >
                 <img
                     src={product.mainImg.url}
                     alt="Natours img"
@@ -43,7 +49,9 @@ export function Card({ setIsOpen, product }) {
                 )} ...`}</p>
                 <div className="card-buton-wrapper">
                     <Link
-                        onClick={() => {
+                        exact
+                        onClick={e => {
+                            e.stopPropagation();
                             onClickHandler();
                         }}
                         className="card-buton"

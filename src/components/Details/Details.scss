@@ -1,0 +1,104 @@
+.details {
+    width: 100%;
+    min-height: 97vh;
+    margin: 4rem 6rem;
+    display: flex;
+
+    &-price {
+        font-size: 2rem;
+        margin-left: 50%;
+        transform: translate(-35%);
+    }
+
+    &-info-wrapper {
+        width: 80%;
+        display: grid;
+        grid-template-columns: 24% 24% 24% 24%;
+        text-align: center;
+        align-items: center;
+    }
+    &-left-side {
+        width: 50%;
+    }
+    &-title {
+        text-align: center;
+        margin: 2rem 4rem;
+        font-size: 3rem;
+    }
+    &-image-section {
+        text-align: center;
+        width: 80%;
+    }
+    .main-img {
+        width: 20rem;
+    }
+    .secondary-img {
+        width: 10rem;
+        height: 10rem;
+        &:not(:last-child) {
+            margin-right: 0.6rem;
+        }
+    }
+    &-info {
+        display: inline-block;
+        font-size: 1.4rem;
+        border: 1px solid gray;
+        margin-right: 1rem;
+        padding: 0.5rem;
+        border-radius: 0.2rem;
+    }
+    &-description {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        width: 80%;
+    }
+    &-right-side {
+        width: 50%;
+        font-size: 1.6rem;
+        &-wrapper {
+            height: 50%;
+            margin-top: 20%;
+            margin-left: 10%;
+            width: 60%;
+            border: 1px solid gray;
+            border-radius: 0.5rem;
+            box-shadow: 0 1rem 1rem black;
+        }
+        &-info {
+            margin: 1rem 1rem;
+
+            display: grid;
+            grid-template-columns: 20% 80%;
+        }
+    }
+}
+.description-title {
+    width: 80%;
+    text-align: center;
+}
+.rating-text {
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+.description-buton {
+    width: 80%;
+    &:link,
+    &:visited {
+        color: white;
+        text-decoration: none;
+    }
+    font-size: 1.9rem;
+    background-image: linear-gradient(
+        to right,
+        rgb(48 74 170),
+        rgb(34 105 196)
+    );
+    margin-left: 20%;
+    padding: 0.4rem 4rem;
+    border-radius: 50rem;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.01) translateY(-0.3rem);
+    }
+}

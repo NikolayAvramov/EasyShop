@@ -1,3 +1,4 @@
+@import "../../mixins";
 .footer {
     background-color: rgb(243, 243, 243);
     font-size: 2rem;
@@ -26,9 +27,18 @@
 
         &:not(:last-child) {
             margin-right: 3rem;
+            @include respond(phoneB) {
+                margin: 0;
+                margin-bottom: 1.2rem;
+            }
         }
         &:hover {
             cursor: pointer;
+        }
+        @include respond(phoneB) {
+            display: block;
+            text-align: center;
+            margin-bottom: 1rem;
         }
     }
     &-link {
@@ -54,6 +64,9 @@
             transform: scale(1.2);
         }
     }
+    &-icons {
+        display: inline-block;
+    }
     &-message {
         font-size: 1.6rem;
     }
@@ -61,6 +74,11 @@
         font-size: 1.4rem;
         width: 80%;
         margin: 0 auto;
+        padding-bottom: 1rem;
         color: gray;
     }
+}
+.icons {
+    display: inline-block;
+    margin-right: 1.4rem;
 }

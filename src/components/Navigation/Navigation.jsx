@@ -1,37 +1,77 @@
-import "./Navigation.scss";
-import navLogo from "../../assets/navLogo.png";
-import { BsSearch } from "react-icons/bs";
-import { useContext } from "react";
 import { ContentContext } from "../../context/ContentContext";
+import { useContext } from "react";
+import { PiTelevisionSimpleBold } from "react-icons/pi";
+import { LiaLaptopSolid } from "react-icons/lia";
+import { GiSmartphone } from "react-icons/gi";
+import { ImTablet } from "react-icons/im";
 
 import {
     AiOutlineHeart,
     AiOutlineShoppingCart,
     AiOutlineUserAdd,
 } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import "./Navigation.scss";
+
+import navLogo from "../../assets/navLogo.png";
+
+import { BsSearch, BsFillCameraFill } from "react-icons/bs";
 
 export function Navigation({ setOpenCart }) {
-    const { allProducts, category, setCategory, sortByCategory } =
-        useContext(ContentContext);
-
+    const {
+        allProducts,
+        setCategory,
+        filterData,
+        setSearchWord,
+        searchWord,
+        cartItem,
+    } = useContext(ContentContext);
+    const navigate = useNavigate();
     return (
         <>
             <div className="nav">
-                <div className="nav-logo-container">
+                <div
+                    className="nav-logo-container"
+                    onClick={() => {
+                        navigate("/");
+                    }}
+                >
                     <img className="nav-logo" src={navLogo} alt="nav-logo" />
                 </div>
                 <div className="nav-search-container">
-                    <input className="nav-search-input" type="text" />
-                    <BsSearch className="nav-search-icon" />
+                    <form action="submit">
+                        <input
+                            className="nav-search-input"
+                            type="text"
+                            value={searchWord}
+                            onChange={e => setSearchWord(e.target.value)}
+                        />
+                        <BsSearch className="nav-search-icon" />
+                    </form>
                 </div>
                 <div className="nav-user-container">
-                    <AiOutlineUserAdd />
-                    <AiOutlineHeart />
-                    <AiOutlineShoppingCart
-                        onClick={() => {
-                            setOpenCart(true);
-                        }}
-                    />
+                    <div className="icon">
+                        <AiOutlineUserAdd />
+                    </div>
+                    <div className="icon">
+                        {" "}
+                        <AiOutlineHeart />
+                    </div>
+                    <div className="icon">
+                        <AiOutlineShoppingCart
+                            onClick={() => {
+                                setOpenCart(true);
+                            }}
+                        />
+                        <p
+                            onClick={() => {
+                                setOpenCart(true);
+                            }}
+                            className="cart-item-count"
+                        >
+                            {cartItem.length}
+                        </p>
+                    </div>
                 </div>
             </div>
             <div className="category">
@@ -41,7 +81,8 @@ export function Navigation({ setOpenCart }) {
                         <li
                             className="category-list-item"
                             onClick={() => {
-                                sortByCategory("All");
+                                setCategory("");
+                                filterData("category", "");
                             }}
                         >
                             All
@@ -49,42 +90,52 @@ export function Navigation({ setOpenCart }) {
                         <li
                             className="category-list-item"
                             onClick={() => {
-                                sortByCategory("tv");
+                                setCategory("tv");
+                                filterData("category", "tv");
                             }}
                         >
-                            TV's
+                            <PiTelevisionSimpleBold className="mobile-buttons" />
+                            <span className="screen-buttons"> TV's</span>
                         </li>
                         <li
                             className="category-list-item"
                             onClick={() => {
-                                sortByCategory("laptop");
+                                setCategory("laptop");
+                                filterData("category", "laptop");
                             }}
                         >
-                            Laptops
+                            <LiaLaptopSolid className="mobile-buttons" />
+                            <span className="screen-buttons"> Laptops</span>
                         </li>
                         <li
                             className="category-list-item"
                             onClick={() => {
-                                sortByCategory("smartphone");
+                                setCategory("smartphone");
+                                filterData("category", "smartphone");
                             }}
                         >
-                            Smartphones
+                            <GiSmartphone className="mobile-buttons" />
+                            <span className="screen-buttons">Smartphones</span>
                         </li>
                         <li
                             className="category-list-item"
                             onClick={() => {
-                                sortByCategory("tablets");
+                                setCategory("tablets");
+                                filterData("category", "tablets");
                             }}
                         >
-                            Tablets
+                            <ImTablet className="mobile-buttons" />
+                            <span className="screen-buttons">Tablets</span>
                         </li>
                         <li
                             className="category-list-item"
                             onClick={() => {
-                                sortByCategory("cameras");
+                                setCategory("cameras");
+                                filterData("category", "cameras");
                             }}
                         >
-                            Cameras
+                            <BsFillCameraFill className="mobile-buttons" />
+                            <span className="screen-buttons"> Cameras</span>
                         </li>
                     </ul>
                 )}

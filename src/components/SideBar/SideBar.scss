@@ -1,3 +1,4 @@
+@import "../../mixins";
 .filter {
     text-align: center;
     margin-top: 6rem;
@@ -8,5 +9,9 @@
         display: grid;
         margin: 1rem 3rem;
         text-align: start;
+        @include respond(phoneB) {
+            width: auto;
+            // text-align: center;
+        }
     }
 }

@@ -1,16 +1,19 @@
 import { useContext, useEffect, useState } from "react";
-import { Card } from "../Card/Card";
-import { SideBar } from "../SideBar/SideBar";
-import "./Home.scss";
 import { ContentContext } from "../../context/ContentContext";
-import { BsFillFileArrowUpFill, BsFillFileArrowDownFill } from "react-icons/bs";
+import "./Home.scss";
+
+import { Card } from "../Card/Card";
+import { Sidebar } from "../SideBar/Sidebar";
 export function Home({ setIsOpen }) {
     const {
         allProducts,
         getAllProducts,
         sortedProducts,
         sortByNameAndPrice,
-        sortByCategory,
+        filterData,
+        searchWord,
+        setShowFilter,
+        showFilter,
     } = useContext(ContentContext);
 
     const [sorted, setSorted] = useState(null);
@@ -20,7 +23,7 @@ export function Home({ setIsOpen }) {
     }, []);
 
     useEffect(() => {
-        sortByCategory("All");
+        filterData("category", "All");
     }, [allProducts]);
 
     if (sorted) {
@@ -31,72 +34,117 @@ export function Home({ setIsOpen }) {
         <>
             <div className="home">
                 <div className="filter-section">
-                    <h4 className="filter-label">Filters</h4>
-                    <SideBar />
+                    <Sidebar />
                 </div>
-                <div className="product-container">
-                    {sortedProducts && (
-                        <>
-                            <div className="sorting-buttons">
-                                <p className="product-count">
-                                    {Math.min(
-                                        showedProduct,
-                                        sortedProducts.length
-                                    )}
-                                    Items.
-                                </p>
-                                <p>
-                                    Sort by name
-                                    <BsFillFileArrowDownFill
-                                        onClick={() => {
-                                            setSorted("name+");
-                                        }}
-                                    />
-                                    <BsFillFileArrowUpFill
-                                        onClick={() => {
-                                            setSorted("name-");
-                                        }}
-                                    />
-                                    by price
-                                    <BsFillFileArrowDownFill
-                                        onClick={() => {
-                                            setSorted("num+");
-                                        }}
-                                    />
-                                    <BsFillFileArrowUpFill
-                                        onClick={() => {
-                                            setSorted("num-");
-                                        }}
-                                    />
-                                </p>
-                            </div>
-                        </>
-                    )}
-
-                    <div className="product-section">
-                        {sortedProducts &&
-                            sortedProducts
-                                .slice(0, showedProduct)
-                                .map(product => (
-                                    <Card
-                                        key={product.objectId}
-                                        setIsOpen={setIsOpen}
-                                        product={product}
-                                    />
-                                ))}
-                    </div>
-                    {sortedProducts &&
-                        showedProduct < sortedProducts.length && (
+                {showFilter ? (
+                    <>
+                        <div className="phone-filter">
+                            <Sidebar />
                             <button
-                                onClick={() => {
-                                    setShowedProduct(state => state + 4);
-                                }}
-                                className="load-more-btn"
+                                onClick={() => setShowFilter(false)}
+                                className="button-apply"
                             >
-                                Load More
+                                Apply filters
                             </button>
-                        )}
-                </div>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div className="product-container">
+                            {sortedProducts && (
+                                <>
+                                    <div
+                                        className="filter-mobile-button"
+                                        onClick={() => {
+                                            setShowFilter(true);
+                                        }}
+                                    >
+                                        Filters
+                                    </div>
+                                    <div className="sorting-buttons">
+                                        <p className="product-count">
+                                            {Math.min(
+                                                showedProduct,
+                                                sortedProducts.length
+                                            )}
+                                            Items.
+                                        </p>
+                                        <p className="sort-text">
+                                            Sort by name
+                                            <button
+                                                className="sorting-button"
+                                                onClick={() => {
+                                                    setSorted("name+");
+                                                }}
+                                            >
+                                                a-z
+                                            </button>
+                                            <button
+                                                className="sorting-button"
+                                                onClick={() => {
+                                                    setSorted("name-");
+                                                }}
+                                            >
+                                                z-a
+                                            </button>
+                                            by price
+                                            <button
+                                                className="sorting-button"
+                                                onClick={() => {
+                                                    setSorted("num+");
+                                                }}
+                                            >
+                                                lower
+                                            </button>
+                                            <button
+                                                className="sorting-button"
+                                                onClick={() => {
+                                                    setSorted("num-");
+                                                }}
+                                            >
+                                                higher
+                                            </button>
+                                        </p>
+                                    </div>
+                                </>
+                            )}
+
+                            <div className="product-section">
+                                {sortedProducts &&
+                                    sortedProducts
+                                        .filter(item => {
+                                            return searchWord.toLowerCase() ===
+                                                ""
+                                                ? item
+                                                : item.title
+                                                      .toLowerCase()
+                                                      .includes(searchWord);
+                                        })
+                                        .slice(0, showedProduct)
+                                        .map(product => (
+                                            <Card
+                                                key={product.objectId}
+                                                setIsOpen={setIsOpen}
+                                                product={product}
+                                            />
+                                        ))}
+                            </div>
+                            {sortedProducts &&
+                                showedProduct < sortedProducts.length && (
+                                    <button
+                                        onClick={() => {
+                                            setShowedProduct(
+                                                state => state + 4
+                                            );
+                                        }}
+                                        className="load-more-btn"
+                                    >
+                                        Load More
+                                    </button>
+                                )}
+                        </div>
+                    </>
+                )}
             </div>
         </>
     );
