@@ -8,6 +8,7 @@ export function Details({ setIsOpen }) {
     const { allProducts, setCartItem } = useContext(ContentContext);
     const [item, setItem] = useState(null);
     const itemId = useParams();
+    let imgArr = [];
     useEffect(() => {
         let arr;
         if (allProducts)
@@ -29,6 +30,13 @@ export function Details({ setIsOpen }) {
         "November",
         "December",
     ];
+    const [main, setMain] = useState();
+    if (item) {
+        imgArr.push(item.mainImg);
+        imgArr.push(item.img1);
+        imgArr.push(item.img2);
+        imgArr.push(item.img3);
+    }
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth();
@@ -36,6 +44,11 @@ export function Details({ setIsOpen }) {
     function onClickHandler() {
         setIsOpen(true);
         setCartItem(state => [...state, item]);
+    }
+    function onClickImageChange(index) {
+        const selected = imgArr[index];
+
+        setMain(selected);
     }
 
     return (
@@ -45,27 +58,32 @@ export function Details({ setIsOpen }) {
                     <div className="details-left-side">
                         <h2 className="details-title">{item.title}</h2>
                         <div className="details-image-section">
-                            <img
-                                src={item.mainImg.url}
-                                alt=""
-                                className="main-img"
-                            />
+                            {main && (
+                                <img
+                                    src={main.url}
+                                    alt=""
+                                    className="main-img"
+                                />
+                            )}
                             <div className="secondary-image-section">
-                                <img
-                                    src={item.img1.url}
-                                    alt=""
-                                    className="secondary-img"
-                                />
-                                <img
-                                    src={item.img2.url}
-                                    alt=""
-                                    className="secondary-img"
-                                />
-                                <img
-                                    src={item.img3.url}
-                                    alt=""
-                                    className="secondary-img"
-                                />
+                                {imgArr &&
+                                    imgArr.map((data, i) => {
+                                        return (
+                                            <span
+                                                key={i}
+                                                className="secondary-image-wrapper"
+                                            >
+                                                <img
+                                                    src={data.url}
+                                                    alt=""
+                                                    className="secondary-img"
+                                                    onClick={() =>
+                                                        onClickImageChange(i)
+                                                    }
+                                                />
+                                            </span>
+                                        );
+                                    })}
                             </div>
                         </div>
                         <p>

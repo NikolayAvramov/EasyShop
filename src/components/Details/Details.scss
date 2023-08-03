@@ -13,7 +13,7 @@
     &-info-wrapper {
         width: 80%;
         display: grid;
-        grid-template-columns: 24% 24% 24% 24%;
+        grid-template-columns: 25% 25% 25% 25%;
         text-align: center;
         align-items: center;
     }
@@ -31,6 +31,7 @@
     }
     .main-img {
         width: 20rem;
+        height: 20rem;
     }
     .secondary-img {
         width: 10rem;
@@ -41,7 +42,7 @@
     }
     &-info {
         display: inline-block;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         border: 1px solid gray;
         margin-right: 1rem;
         padding: 0.5rem;
@@ -100,5 +101,10 @@
     &:hover {
         cursor: pointer;
         transform: scale(1.01) translateY(-0.3rem);
+    }
+}
+.secondary-image-wrapper {
+    &:not(:last-child) {
+        margin-right: 0.6rem;
     }
 }
