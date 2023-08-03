@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { ContentContext } from "../../context/ContentContext";
 export function Card({ product, setIsOpen }) {
     const navigate = useNavigate();
-    const { setCartItem, cartItem } = useContext(ContentContext);
+    const { setCartItem } = useContext(ContentContext);
     function onClickHandler() {
         setIsOpen(true);
         setCartItem(state => [...state, product]);

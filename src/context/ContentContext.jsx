@@ -7,29 +7,73 @@ export function ContentProvider({ children }) {
     const [sortedProducts, setSortedProducts] = useState(null);
     const [cartItem, setCartItem] = useState([]);
     const [searchWord, setSearchWord] = useState("");
-    const [category, setCategory] = useState("");
     const [showFilter, setShowFilter] = useState(false);
     const [isOpen, setIsOpen] = useState(true);
+    const [category, setCategory] = useState("");
     function getAllProducts() {
-        fetchAllProducts().then(result => setAllProducts(result));
+        fetchAllProducts().then(result => {
+            setAllProducts(result);
+        });
     }
-    function filterData(cat, val) {
-        let sorted = allProducts;
-        if (category) {
-            sorted = sorted.filter(product => product.category === category);
-        }
+    function filterByCategory(val, allProducts) {
+        let sorted;
 
-        if (val === "All" || val === "") {
-            setSortedProducts(allProducts);
-        } else {
-            if (cat === "price") {
-                sorted = sorted.filter(product => product[cat] <= val);
+        if (allProducts) {
+            if (val === "") {
+                sorted = allProducts;
             } else {
-                sorted = sorted.filter(product => product[cat] === val);
+                sorted = allProducts.filter(
+                    product => product.category === val
+                );
             }
+            setSortedProducts(sorted);
+        }
+    }
+
+    function filterRadioData(name, val) {
+        let filtered;
+
+        if (allProducts) {
+            filtered = allProducts;
         }
 
-        setSortedProducts(sorted);
+        if (name === "Color") {
+            filtered = filtered.filter(product => {
+                if (val) {
+                    return product[name] === val;
+                } else {
+                    return product;
+                }
+            });
+        }
+        if (name === "brand") {
+            filtered = filtered.filter(product => {
+                if (val) {
+                    return product[name] === val;
+                } else {
+                    return product;
+                }
+            });
+        }
+        if (name === "price") {
+            filtered = filtered.filter(product => {
+                if (val) {
+                    if (val > 899) {
+                        return product.price > val;
+                    } else if (val > 599) {
+                        return product.price > val && product.price < 899;
+                    } else if (val > 299) {
+                        return product.price > val && product.price < 599;
+                    } else if (val == 1) {
+                        return product.price > val && product.price < 299;
+                    }
+                } else {
+                    return product;
+                }
+            });
+        }
+
+        filterByCategory(category, filtered);
     }
     function sortByNameAndPrice(arr, criteria) {
         let sortedArr = [];
@@ -66,7 +110,6 @@ export function ContentProvider({ children }) {
                 sortedArr = arr.sort((a, b) => {
                     let first = a.price;
                     let second = b.price;
-                    // console.log(first, second);
                     return second - first;
                 });
 
@@ -75,19 +118,11 @@ export function ContentProvider({ children }) {
         }
     }
 
-    function handleChange(e) {
-        filterData(e.target.name, e.target.value);
-    }
-    function delItem(item) {
-        setCartItem(state =>
-            state.filter(product => product.objectId !== item.objectId)
-        );
-    }
     const contentValues = {
         allProducts,
+        filterRadioData,
         getAllProducts,
-        filterData,
-        setCategory,
+        filterByCategory,
         sortedProducts,
         sortByNameAndPrice,
         setSortedProducts,
@@ -95,12 +130,11 @@ export function ContentProvider({ children }) {
         cartItem,
         searchWord,
         setSearchWord,
-        handleChange,
         showFilter,
         setShowFilter,
         isOpen,
         setIsOpen,
-        delItem,
+        setCategory,
     };
 
     return (

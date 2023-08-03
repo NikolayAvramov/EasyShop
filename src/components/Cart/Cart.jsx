@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { ContentContext } from "../../context/ContentContext";
 
 export function Cart({ setOpenCart }) {
-    const { cartItem } = useContext(ContentContext);
+    const { cartItem, setCartItem } = useContext(ContentContext);
     const [discountCode, setDiscountCode] = useState("");
     const [totalPrice, setTotalPrice] = useState(0);
     function makeDiscount(e) {
@@ -49,6 +49,15 @@ export function Cart({ setOpenCart }) {
                 </div>
                 <div className="footer">
                     <div className="footer-total-price">
+                        <button
+                            onClick={() => {
+                                setCartItem([]);
+                                setTotalPrice(0);
+                            }}
+                            className="clear-cart-button"
+                        >
+                            Clear Cart
+                        </button>
                         <h3 className="footer-title">Total Price</h3>
                         <p className="show-total-price">
                             {totalPrice.toFixed(2)}$

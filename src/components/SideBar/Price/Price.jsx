@@ -1,26 +1,14 @@
-import { useContext } from "react";
-import { ContentContext } from "../../../context/ContentContext";
 import { Input } from "../Input/Input";
 export function Price() {
-    const { handleChange } = useContext(ContentContext);
     return (
         <>
             <h3 className="filter-title">Price</h3>
             <div className="filter-inputs">
-                <label className="label">
-                    <input
-                        onChange={handleChange}
-                        className="radio-input"
-                        type="radio"
-                        name="price"
-                        value=""
-                    />
-                    <span></span> All
-                </label>
-                <Input name={"price"} value={200} title={"0-200"} />
-                <Input name={"price"} value={400} title={"200-400"} />
-                <Input name={"price"} value={800} title={"400-800"} />
-                <Input name={"price"} value={10000} title={"Over 800"} />
+                <Input name={"price"} value={""} title={"All"} />
+                <Input name={"price"} value={1} title={"0 - 300"} />
+                <Input name={"price"} value={300} title={"300 - 600"} />
+                <Input name={"price"} value={600} title={"600 - 900"} />
+                <Input name={"price"} value={900} title={"900 - 1200"} />
             </div>
         </>
     );

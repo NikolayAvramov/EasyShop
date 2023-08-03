@@ -3,14 +3,15 @@ import { ContentContext } from "../../context/ContentContext";
 import "./Home.scss";
 
 import { Card } from "../Card/Card";
-import { Sidebar } from "../SideBar/Sidebar";
+import { Sidebar } from "../SideBar/SideBar";
+
 export function Home({ setIsOpen }) {
     const {
         allProducts,
         getAllProducts,
         sortedProducts,
         sortByNameAndPrice,
-        filterData,
+        filterByCategory,
         searchWord,
         setShowFilter,
         showFilter,
@@ -23,7 +24,7 @@ export function Home({ setIsOpen }) {
     }, []);
 
     useEffect(() => {
-        filterData("category", "All");
+        filterByCategory("", allProducts);
     }, [allProducts]);
 
     if (sorted) {

@@ -21,7 +21,7 @@ export function Navigation({ setOpenCart }) {
     const {
         allProducts,
         setCategory,
-        filterData,
+        filterByCategory,
         setSearchWord,
         searchWord,
         cartItem,
@@ -82,7 +82,7 @@ export function Navigation({ setOpenCart }) {
                             className="category-list-item"
                             onClick={() => {
                                 setCategory("");
-                                filterData("category", "");
+                                filterByCategory("", allProducts);
                             }}
                         >
                             All
@@ -91,7 +91,7 @@ export function Navigation({ setOpenCart }) {
                             className="category-list-item"
                             onClick={() => {
                                 setCategory("tv");
-                                filterData("category", "tv");
+                                filterByCategory("tv", allProducts);
                             }}
                         >
                             <PiTelevisionSimpleBold className="mobile-buttons" />
@@ -101,7 +101,7 @@ export function Navigation({ setOpenCart }) {
                             className="category-list-item"
                             onClick={() => {
                                 setCategory("laptop");
-                                filterData("category", "laptop");
+                                filterByCategory("laptop", allProducts);
                             }}
                         >
                             <LiaLaptopSolid className="mobile-buttons" />
@@ -111,7 +111,7 @@ export function Navigation({ setOpenCart }) {
                             className="category-list-item"
                             onClick={() => {
                                 setCategory("smartphone");
-                                filterData("category", "smartphone");
+                                filterByCategory("smartphone", allProducts);
                             }}
                         >
                             <GiSmartphone className="mobile-buttons" />
@@ -121,7 +121,7 @@ export function Navigation({ setOpenCart }) {
                             className="category-list-item"
                             onClick={() => {
                                 setCategory("tablets");
-                                filterData("category", "tablets");
+                                filterByCategory("tablets", allProducts);
                             }}
                         >
                             <ImTablet className="mobile-buttons" />
@@ -131,7 +131,7 @@ export function Navigation({ setOpenCart }) {
                             className="category-list-item"
                             onClick={() => {
                                 setCategory("cameras");
-                                filterData("category", "cameras");
+                                filterByCategory("cameras", allProducts);
                             }}
                         >
                             <BsFillCameraFill className="mobile-buttons" />
