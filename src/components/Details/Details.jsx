@@ -4,17 +4,20 @@ import { Link, useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { BsCart4 } from "react-icons/bs";
 import { ContentContext } from "../../context/ContentContext";
+import { getById } from "../../services/dataService";
 export function Details({ setIsOpen }) {
-    const { allProducts, setCartItem } = useContext(ContentContext);
+    const { setCartItem } = useContext(ContentContext);
     const [item, setItem] = useState(null);
     const itemId = useParams();
+
     let imgArr = [];
     useEffect(() => {
-        let arr;
-        if (allProducts)
-            arr = allProducts.filter(item => item.objectId === itemId.id);
-        setItem(arr[0]);
-    }, [allProducts]);
+        getById(itemId.id).then(result => {
+            setItem(result);
+
+            setMain(result.mainImg);
+        });
+    }, []);
 
     const monthArr = [
         "January",

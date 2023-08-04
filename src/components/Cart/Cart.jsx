@@ -81,7 +81,7 @@ export function Cart({ setOpenCart }) {
                             setOpenCart(false);
                         }}
                     >
-                        Keep Shoping
+                        Continue Shoping
                     </button>
                 </div>
             </div>
