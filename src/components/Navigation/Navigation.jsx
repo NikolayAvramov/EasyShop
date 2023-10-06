@@ -75,7 +75,7 @@ export function Navigation({ setOpenCart }) {
                 </div>
             </div>
             <div className="category">
-                <h2 className="category-title">Category</h2>
+                <h2 className="category-title">Category's</h2>
                 {allProducts && (
                     <ul className="category-list">
                         <li
